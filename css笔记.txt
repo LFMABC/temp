@@ -1,0 +1,1514 @@
+设置标签样式
+
+标签 {
+  属性 : ...;
+  属性 : ...;
+  属性 : ...;
+  属性 : ...;
+  属性 : ...;
+  ....
+}
+
+如:
+
+h1 {
+  color : green;
+}
+
+将h1显示的颜色设为绿色
+
+在html 里嵌入css的代码
+
+<style>//一般放在head
+  css代码
+</style>
+
+可以从外部引用
+
+<style type="text/css">
+  @import url("css/temp.css")
+</style>
+
+也可以这样
+
+h1 {
+  color : green;
+}
+
+h2 {
+  color : yellow;
+}
+
+///////////
+
+还可以一下设置多个标签
+
+h1,h2 {
+  color : green;
+}
+
+每个标签都包含style属性,也可以用这个属性增加样式
+<h1 style="...">...</h1>
+要是外部样式和内部样式和行内样式冲突了,那就是谁的样式最后被加载出来就执行谁的样式
+
+但如果外部样式这样写
+
+h1 {
+  color : green!important;
+}
+
+这样无论怎么样,这个标签的color属性都只能是green
+
+因为important权限是最高的
+
+///////////////////////////////////////////////////////
+
+属性
+
+color 颜色
+background-color 背景颜色
+
+///////////////////////////////////////////////////////
+
+class选择器
+
+<div class="top">...</div>
+
+设置属性:
+
+.top{
+  width: 200px;
+  height:100px;
+  background-color: green;
+}
+
+<div class="i a">...</div>
+
+上面的那个就是用了两个类 i 和 a
+
+如果设置样式是有冲突,就会就近匹配 
+
+div.top {/*div中是top类的会被设置*/
+
+}
+
+///////////////////////////////////////////////////////
+
+id选择器
+
+<div id="box">...</div>
+
+设置属性:
+
+#box{
+  width: 200px;
+  height:100px;
+}
+
+<div id="i a">...</div>//不能这样
+
+///////////////////////////////////////////////////////
+
+通配符选择器
+
+* {
+  /*会匹配所有的标签*/
+  margin:0;/*外边距*/
+  padding:0;/*内边距*/
+}
+
+///////////////////////////////////////////////////////
+
+后代选择器:
+
+<div>
+  <p>1111111111</p>
+</div>
+
+要想设置里面的p标签,可以这样:
+
+div p{
+  color : green;
+}
+
+///////////////////////////////////////////////////////
+
+亲子选择器:
+
+.item>p {
+  color: green;
+}
+
+这样的话就只有item类的子标签p会被设置,其他的子标签里面的p标签不会被设置
+
+///////////////////////////////////////////////////////
+
+兄弟选择器
+
+<div class="top">1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+<div>5</div>
+
+.top~div {/*top类后面的所有div标签都会被设置*/
+	background: green;
+}
+
+.top+div {/*top类后面的第一个div标签会被设置*/
+	background: red;
+}
+
+///////////////////////////////////////////////////////
+
+属性选择器:
+
+[class] {/*所有只拥有class属性的都会被设置*/
+	...
+}
+
+div[class] {/*div中只拥有class属性的都会被设置*/
+	...
+}
+
+div[class=box1] {/*div中class属性被只赋box1的都会被设置*/
+	...
+}
+
+div[class~=box1] {/*div中class属性被有赋box1的都会被设置*/
+	...
+}
+
+div[class^=box1] {/*div中class属性赋的值开头有box1都会被设置*/
+	...
+}
+
+div[class$=box1] {/*div中class属性赋的值末尾有box1都会被设置*/
+	...
+}
+
+div[class*=box1] {/*div中class属性赋的值只要包含box1都会被设置*/
+	...
+}
+
+///////////////////////////////////////////////////////
+
+伪类选择器
+a标签举例
+a:link 超链接的初始状态
+a:visited 超链接被访问后的状态
+a:hover 鼠标划过超链接时的状态
+a:active 超链接被激活的状态,即鼠标按下超链接时的状态
+
+///////////////////////////////////////////////////////
+
+结构伪类选择器
+
+.box div:last-child { /*设置box类中最后一个子div*/
+
+}
+
+.box div:first-child { /*设置box类中第一个子div*/
+
+}
+
+.box div:nth-child(2) { /*设置box类中第二个子标签而且是div*/
+
+}
+
+.box div:nth-child((2n或even)) { /*设置box类中偶数个子div*/
+
+}
+
+.box div:nth-child((2n+1或odd)) { /*设置box类中奇数个子div*/
+	
+}
+
+div p:only-child {/*div中只有一个p标签的时候才会设置p标签*/
+	background: red;
+}
+
+div:empty {/*div中没有任何东西才会被设置*/
+	background: red;
+}
+
+:root {/*设置根节点(一般是html)*/
+	background: red;
+}
+
+///////////////////////////////////////////////////////
+
+目标伪类选择器
+
+div:target {/*当div关联到的锚点(a标签)被点击后的样式*/
+	background: red;
+}
+
+///////////////////////////////////////////////////////
+
+元素状态伪类选择器
+
+input:enabled {/*元素非禁用状态*/
+	background: red;
+}
+
+input:disabled {/*元素禁用状态*/
+	background: yellow;
+}
+
+input:focus {/*元素选中状态*/
+	background: blue;
+}
+
+input:checked { /*勾选之后的样式*/
+	background: red;
+}
+
+div::selection { /*文字选中样式*/
+	background: yellow;
+	color: red;
+}
+
+///////////////////////////////////////////////////////
+
+否定选择器
+
+li:not(:first-child){ /*反选*/
+	background: blue;
+}
+
+///////////////////////////////////////////////////////
+选择器的权重:
+
+标签选择器<class选择器<id选择器<内联选择器<!important
+包含选择器:<div><p>....</p><div>
+
+p{
+  color: green;
+}
+
+div p{//这个比上面那个高
+  color: red;
+}
+///////////////////////////////////////////////////////////////////
+
+文本属性
+
+font-size 字体大小 默认是 16px;
+
+font-size: 20px;
+
+font-family: consolas;//设置字体为consolas
+
+font-family: ...,...,...;//如果第一个找不到,就用第二个
+
+color : 设置颜色
+
+第一种:
+
+color : red;//直接写单词
+
+2.
+
+color : #ff0;//通过十六进制
+
+3.
+
+color : rgb(0-255,0-255,0-255);//设置红,绿,蓝三种颜色分配
+
+font-weight 加粗
+
+100 细体
+400 正常
+900 加粗
+
+font-weight: lighter;//更轻的
+
+font-weight: normal;//正常的
+
+font-weight: bolder;//更粗的
+
+font-style 加粗
+
+font-style: italic;//斜体字
+
+font-style: normal;//正常的
+
+font-style: oblique;//倾斜的
+
+text-align 设置字体的水平方向
+
+text-align:center//居中
+
+text-align : justify;//两端对齐
+
+width: 数字px 设置宽度
+
+height: 数字px 设置高度
+
+background-color 设置背景颜色
+
+line-height 设置垂直占的位置
+
+line-height : 数字px
+
+Letter-spacing 设置字符之间的间隔
+
+Letter-spacing: 10px;
+
+word-spacing 设置单词之间的间隔
+word-spacing : 10px
+
+text-indent 设置缩进
+
+text-indent : 10px;
+
+还可以这样
+
+text-indent : 2em;//表示空出来当前两个字的大小
+
+text-decoration 设置划线
+
+text-decoration : underline;//显示下划线
+text-decoration : line-through;//显示删除线
+text-decoration : overline;//显示上划线
+text-decoration : none;//无下划线
+
+还可以这样:
+
+text-decoration : underline line-through overline;
+
+检索大小写:
+
+text-transform 检索大小写
+
+text-transform: capitalize; //每个单词的开头都是大写
+
+text-transform: lowercase;//全部都是小写
+
+text-transform: uppercase;//全部都是大写
+
+text-transform: none;//无(会取消某些标签的用处)
+
+font 是 font-style font-weight font-size/line-height font-family;
+
+阴影属性:
+
+div {
+	text-shadow: 10px(向下偏移10px) 10px(向右偏移10px) 1px(模糊度)
+	red(颜色);
+}
+
+还可以设置两个阴影
+
+text-shadow: 10px 10px 1px red,10px -10px 5px yellow;
+
+字体引入
+
+@font-face {
+	font-family: html;
+	scr:url("引入字体的路径");
+}
+
+使用
+
+div {
+	font-family: html;
+}
+
+///////////////////////////////////////////////////////////////////
+
+列表属性:
+
+list-style-type 设置左边显示的;
+
+list-style-type: disc;//实心圆
+
+list-style-type: circle;//空心圆
+
+list-style-type: square;//实心正方形
+
+list-style-type: none;//不显示
+
+list-style-image 左边显示图片
+
+list-style-image: url(路径);
+
+list-style-position 设图片在哪里
+
+list-style-position: outside;列表的外面 默认值
+
+list-style-position: inside;列表的里面
+
+list-style 简写
+
+list-style: none; //清除所有符号
+
+///////////////////////////////////////////////////////////////////
+
+背景属性:
+
+background-color 设置背景颜色
+background-color 也支持 red,rgb(0-255,0-255,0-255),#ffffff;
+
+还有rgba(0-255,0-255,0-255,0.5(透明度));
+
+background-image 设置背景图片;
+background-image: url(路径);
+
+当一张图不够填充时,会多出一张图来填补剩下的
+
+background-repeat 设置背景图片显示
+
+background-repeat：repeat;//默认
+
+background-repeat: repeat-x;//x轴平铺
+
+background-repeat: repeat-y;//y轴平铺
+
+background-repeat: no-repeat;//不平铺
+
+background-position 设置图片离左边和上面的距离
+
+background-position: 20px 20px;//距离左边,上边20像素
+
+background-position: 10% 10%;//根据父元素的长度决定
+
+background-position: left center;//用英文单词决定
+
+background-size 设置图片占的大小
+
+background-size:100% 100%;//占100%大小
+
+background-size: cover;//尽量用图片把背景填满
+
+background-size: cotain;//尽量图片全部显示到背景上
+
+background-attachment: fixed;//滚动条滚动的时候,图片就会固定在那
+
+background-attachment: scroll;//默认,没有效果
+
+background 复合属性
+
+background : background-color background-image background-repeat background-position background-attachment;
+
+示例:
+
+background : yellow url(img/1.png) no-repeat center fixed;
+
+/////////////////////////////////////////////////////////////////////////////
+
+
+浮动属性:
+
+float 浮动
+
+float: left;//向左上浮动
+
+float: right;//右上浮动
+
+float: none;//无
+
+如果所有div标签都设float: left;那他们就会平起平坐
+
+right就是靠右
+
+clear 轻浮动
+
+clear: left;不允许左边上面有浮动的,否则就会向有位置的地方移
+
+clear: right;不允许右边上面有浮动的,否则就会向有位置的地方移
+
+clear: both;不允许左右右边上面有浮动的,否则就会向有位置的地方移
+
+overflow 关于浮动元素
+
+overflow: hidden;//让浮动元素计算高度,不让其他元素重合
+
+/////////////////////////////////////////////////////////////////////////////
+
+盒子模型:
+
+padding 内边距
+
+padding
+
+---------------------------------
+      外边距                     |
+  ----------------------         |
+  |     内边距          |        |
+  |    ---------        |        |
+  |    |  内容  |       |        |
+  |    ---------        |        |
+  ----------------------        |
+                                |
+---------------------------------
+
+外边距 离别的元素的距离
+
+内边距 与内容的距离
+
+padding: 30px;//内边距是30px
+
+当只设置一个时那四边都是这个长度
+
+当设置两个时 上下是第一个,左右是第一个
+
+当设置三个时 上第一个,左右第二个,下第三个
+
+当设置四个值时 上第一个,右第二个,下第三个,左第四个
+
+
+单一设置
+
+padding-top 上面
+
+padding-buttom 下面
+
+padding-right 右边
+
+padding-left 左边
+
+border 边框
+
+border: 10px //边框为10像素
+
+border: 10px solid red;//实现颜色为红色实心边框
+
+border: 10px double red;//双线的效果
+
+border: 10px dashed red;//虚线
+
+border: 10px dotted red;//点状虚线
+
+border: 10px transparent red;//透明
+
+也可以这样
+
+border-top: 10px
+
+border-width 相当于设置边框像素
+
+border-color 设置边框颜色
+
+border-style 设置什么方式展现(solid,double,dashed,dotted)
+
+border-color 也可以做到四边不同的设置
+
+border-color: green blue black red;
+
+border-style 也可以这样
+
+margin 外边距
+
+margin 和 padding差不多
+
+margin: 10px 20px 30px 40px;
+
+margin-left: 20px;
+margin-right: 20px;
+margin-top: 20px;
+margin-buttom: 20px;
+
+margin也支持负值
+
+margin: 0 auto;//auto居中,这样就可以居中
+
+/////////////////////////////////////////////////////////////////////////////
+
+溢出属性:
+
+overflow 溢出属性
+
+overflow: visible;//默认值,溢出内容会显示在元素之外
+
+overflow: hidden;//溢出内容会隐藏
+
+overflow: scroll;//溢出内容会以滚动方式显示(横着的,竖着的滚动条都有)(不管有没有溢出,都有滚动条)
+
+overflow: auto;//溢出内容会以滚动方式显示(横着的,竖着的滚动条都有)(溢出就有滚动条,没有溢出就没有滚动条)
+
+overflow: inherit;//规定应该遵循从父元素继承overflow属性的值
+
+overflow-x 对x轴设置
+
+overflow-y 对y轴设置
+
+white-space: normal;//默认值 浏览器不管
+
+white-space: nowrap;//不管元素大小影响 ,正常显示,
+
+white-space: pre;//保留换行,tab,空格(但还不受到元素长度影响)
+
+white-space: pre-wrap;//保留换行,tab,空格(受到元素长度影响)
+
+white-space: pre-wrap;//只保留换行(受到元素长度影响)
+
+text-overflow: clip;//溢出的内容被裁切
+
+text-overflow: ellipsis;//溢出的内容换成省略号
+
+/////////////////////////////////////////////////////////////////////////////
+
+显示属性:
+
+之所以a标签设置不了高和宽,是因为他不是块级元素
+
+块级元素(div,p,ul,li,dl,dt,dd,h1-h6 ...)(独占一行)
+
+行内元素(a,b,em,i,span strong ...)(不独占一行)
+
+行内块元素(img,input)(既不独占一行,又可以设置行内元素不能设置的属性)
+
+
+display 设置元素占位置的方式
+
+display: block;//将元素设为块级元素
+
+display: inline;//设置成行内元素
+
+display: inline-block;//将元素设为行内块元素
+
+display: none;//隐藏标签
+
+/////////////////////////////////////////////////////////////////////////////
+
+定位属性(定位):
+
+position: static;//默认值 不支持top left right bottom赋值
+
+position: relative;//相对位置 偏移之前的位置是自己的初始位置 支持top left right bottom赋值 
+
+top: 100px;//距离上边100px
+
+left: 100px;//距离左边100px
+
+right: 100px;//距离右边100px
+
+bottom: 100px;//距离下面100px
+
+还有一个点是,他移动之后他原来的位置不会被别的元素占领
+
+position: absolute;//绝对位置 偏移之前的位置是页面左上角 支持top left right bottom赋值
+
+top: 100px;//距离上边100px
+
+left: 100px;//距离左边100px
+
+right: 100px;//距离右边100px
+
+bottom: 100px;//距离下面100px
+
+还有一个点是,他移动之后他原来的位置会被别的元素占领
+
+如果父盒子定义了position: relative;那子盒子就会按照父盒子的相对位置去移动
+
+position: fixed;//固定位置 偏移之前的位置是页面左上角 支持top left right bottom赋值
+
+top: 100px;//距离上边100px
+
+left: 100px;//距离左边100px
+
+right: 100px;//距离右边100px
+
+bottom: 100px;//距离下面100px
+
+但这样的话无论滚动条怎样移动它就一直固定在那
+还有一个点是,他移动之后他原来的位置会被别的元素占领
+
+position: sticky;//粘性定位 做到的是吸顶的效果 因为粘性定位是css3.0新增加的,兼容性不好 支持top赋值
+
+top: 100px;//吸顶时距离上边100px
+
+z-index 设置高度
+
+z-index: 100;
+
+如果两个都设置了
+
+position: relative;
+
+那就是第二个高
+
+因为后来者居上
+
+但如果第一个高度设置200,第二个设置50,那第一个就会覆盖第二个
+
+/////////////////////////////////////////////////////////////////////////////
+
+锚点
+
+用a链接
+
+<a href="#锚点位置"></a>
+
+<div id="top"></div>
+
+<a href="#top">点我</a>
+
+如果点a链接的话,那他就会跳转到id为top的标签上
+
+/////////////////////////////////////////////////////////////////////////////
+
+自适应大小
+
+min-height 最小高度
+
+max-height 最大高度
+
+min-width 最小宽度
+
+max-width 最大宽度
+
+/////////////////////////////////////////////////////////////////////////////
+
+伪元素(对单独的东西进行设置)：
+
+div::first-letter {
+  //对标签里面的第一个字设置样式
+  font-size: 30px;
+  color: red;
+}
+
+div::first-letter {
+  //对标签里面的第一行字设置样式
+  font-size: 30px;
+  color: red;
+}
+
+div::before {
+  //在字的开头加一些文本(注,不能选中)
+  content: "内容";
+}
+
+div::after {
+  //在字的末尾加一些文本(注,不能选中)
+  content: "内容";
+}
+
+/////////////////////////////////////////////////////////////////////////////
+
+计算函数
+
+calc() 数学运算 支持 +-*/
+
+width: calc(100% - 10px);//中间必须留空格
+
+/////////////////////////////////////////////////////////////////////////////
+
+输入框样式:
+
+resize 重新设置大小
+
+resize: none;//不能拖动输入框
+
+resize: vertical;//只能拖动上下
+
+resize: horizontal;//只能拖动左右
+
+resize: both;//默认值,两个方向都可以移动
+
+/////////////////////////////////////////////////////////////////////////////
+
+阴影属性
+
+box-shadow:  10px(向下偏移10px) 10px(向右偏移10px) 1px(模糊度);
+
+text-shadow: 10px(向下偏移10px) 10px(向右偏移10px) 1px(模糊度);
+
+text-shadow: 10px 10px 1px red inset(内阴影会在盒子里面,溢出的部分会截掉);
+
+/////////////////////////////////////////////////////////////////////////////
+
+圆角效果
+
+border-raius 设置圆角效果
+
+border-raius: 10px;//磨边长为10px的边角
+
+也可以设置多个值
+
+border-raius: 10px,20px;
+
+还可以这样
+
+border-top-left-raius 设置左上
+
+border-raius: 30px/60px 水平30,垂直60只支持这个
+
+/////////////////////////////////////////////////////////////////////////////
+
+怪异盒模型
+
+box-sizing 设置盒子状态
+
+box-sizing: content-box;//标准盒子
+
+box-sizing: border-box;//当盒子里面空间不够时,会挤压里面的内容
+
+/////////////////////////////////////////////////////////////////////////////
+
+弹性盒
+
+display: flex;//弹性盒子
+
+影响:
+
+1.子元素默认横向排列,可以设置大小
+2.可以随意设置位置(margin: auto;(居中))
+
+flex-direction 设置排列方式
+
+flex-direction: row;//横向排列(靠左)
+
+flex-direction: column;//竖直排列(靠上)
+
+flex-direction: row-reverse;//横向翻转排列(靠右)
+
+flex-direction: column;//竖直排列(靠下)
+
+justify-content 设置主轴对齐方式
+
+justify-content: flex-start;//默认值,靠左
+
+justify-content: flex-end;//靠右
+
+justify-content: center;//水平居中
+
+justify-content: space-between;//两端对其
+
+justify-content: space-around;//距离环绕
+
+justify-content: space-evenly;//每个标签的距离一致(包括边框)
+
+align-items 调整竖轴位置
+
+align-items: flex-start;//顶部
+
+align-items: center;//中间
+
+align-items: flex-end;//底部
+
+flex-wrap 溢出时的决定
+
+flex-wrap: wrap;//折行
+
+align-content 控制折行后的距离
+
+align-content: flex-start;//靠左并将间距设为0
+
+align-content: flex-end;//靠右并将间距设为0
+
+align-content: center;//居中并将间距设为0
+
+align-content: space-between;//两端对其
+
+align-content: space-evenly;//每个标签的距离一致(包括边框)
+
+align-self 单独设置子标签位置
+
+align-self: flex-start;//将子标签移到最下面
+
+align-self: flex-end;//将子标签移到最上面
+
+align-self: center;//将子标签移到中间
+
+align-self: baseline;//默认值,初始位置
+
+align-self: stretch;//拉伸,会占满主轴方向长度(如果设置了高度则无效)
+
+如果别的标签经过移动,留下的空白空间不会被占领
+
+order 单独设置排序,默认值是0
+
+如果两个标签order值一样,那就按照正常顺序排
+
+如果两个标签,第一个的order值比第二个的order值大,那第一个
+就会排在第二个的后面
+
+如果两个标签,第二个的order值比第一个的order值小,那第二个
+就会排在第一个的前面
+
+order: 0;
+
+flex	剩余宽高 
+
+flex: 1;//占满剩余空间
+
+flex: 2;//如果其他标签没设flex属性,那与flex: 1;一样
+如果设置了
+
+.div1 {
+	flex: 1;
+}
+
+.div2 {
+	flex: 2;
+}
+
+/*这样的话就会把剩余空间分成三份,div1占1份,div2占两份*/
+
+flex-shrink 挤压
+
+flex-shrink: 0;//不允许被挤压(也是单独设置弹性盒里面的标签)
+
+/////////////////////////////////////////////////////////////////////////////
+
+多列布局
+
+column-count 显示的列数
+
+column-count: 5;//将内容分割成5列
+
+column-gap 列间距
+
+column-gap: 10px;//列间距为10px
+
+column-rule 列边框
+
+column-rule: 2px solid red;
+
+column-fill 列高度统一
+
+column-fill: banlance;//平衡(默认值)
+
+column-fill: auto;//尽量把父盒子剩下的空间占满
+
+column-width 调整列宽
+
+column-width: 500px;
+
+column-span 横跨(设给子标签)
+
+column-span: none;//不横跨
+
+column-span: all;//横跨所有列(会在最高处占满一行)
+
+/////////////////////////////////////////////////////////////////////////////
+
+设置滚动条
+
+::-webkit-scrollbar{/*chrome内核提供(-webkit)*/
+	display: none;//隐藏滚动条
+}
+
+height: 100px;
+width: 100px;
+
+background: red;
+
+/////////////////////////////////////////////////////////////////////////////
+
+@media 响应式布局
+
+@media all and (min-width: 500px){
+	/*满足上面要求的设备会执行这些样式*/
+	/*上面的要求是所有设备中,只要屏幕宽度大于500px,就会执行这些样式*/
+	/*and右边的也可以用:not()反选*/
+	/*and右边也可以设置min-height max-height max-width(等等)*/
+	body {
+		/*样式*/
+	}
+}
+
+或这样
+
+@media print {
+	p {
+		/*样式*/
+	}
+}
+
+all 所有设备
+aural 听觉设备
+brailla 点字(电子)触觉设备
+handlled 便携设备(如手机,平板电脑)
+print 打印预览图等
+projection 投影设备
+screen 显示器,笔记本,移动端(手机等)等设备
+tty 如打字机或终端等设备
+tv 电视机等设备类型
+cmbossed 盲文打印机
+
+and 关联
+
+orientation: portrait 如果宽比高小,那就执行里面的样式
+
+orientation: landscape 如果高比宽小,那就执行里面的样式
+
+/////////////////////////////////////////////////////////////////////////////
+
+px en rem
+
+px 像素大小
+
+em 相对单位,相对于父元素的字体大小
+
+rem 相对单位,相对于根元素(html)字体大小
+
+/////////////////////////////////////////////////////////////////////////////
+
+vh vw 等比例缩放单位
+
+vh 视口的高度
+
+vw 视口的宽度
+
+100vh 高度是视口高度的100%
+
+80vh 高度是视口高度的80%
+
+100vw 宽度是视口宽度的100%
+
+80vw 宽度是视口宽度的80%
+
+/////////////////////////////////////////////////////////////////////////////
+
+渐变 
+
+background: linear-gradient();//渐变值
+
+background: linear-gradient(red,green);//从红色渐变到绿色
+
+background: linear-gradient(red,green,blue);//也支持多个值
+
+background: linear-gradient(to top(left,bottom,right),red,green bottom,blue);//也支持方向
+
+也可以这样
+
+background: linear-gradient(to top right,red,green bottom,blue left);
+
+还可以设置角度
+
+background: linear-gradient(0deg(相当于to top 90deg 相当于 to right),red,green bottom,blue);
+
+
+background: linear-gradient(red 0%,green 10%,blue 30%);//看1105行
+
+background: repeating-linear-gradient(red 0%,green 10%,blue 30%);//重复线性
+
+径向渐变
+
+.box1 {
+  width: 200px;
+  height: 200px;
+  border: 5px solid gray;
+  background: radial-gradient(red,green);//还是可以支持多个值
+}
+
+../img/3.png //效果
+
+.box1 {
+  width: 200px;
+  height: 200px;
+  border: 5px solid gray;
+  background: radial-gradient(red 0%,green 10%,blue 30%);
+	/*
+		0%~10% 是红色到绿色的过渡
+		10%~30% 是绿色到蓝色的过度
+		剩下的全都是蓝色的
+	*/
+	
+	background: radial-gradient(circle,red 0%,green 10%,blue 30%);//形状必须是圆
+	background: repeating-gradient-gradient(red 0%,green 10%,blue 30%);//重复线性
+}
+
+还有一些
+
+../img/4.png
+
+/////////////////////////////////////////////////////////////////////////////
+
+动画过渡属性(形状变化)
+
+transtition: height 2s;
+/*
+	当高度变化时,两秒完成过渡
+	比如:
+	div {
+		width: 200px;
+		height: 200px;
+		background: red;
+		transtition: height 2s;
+	}
+	
+	div:hover {
+		height: 600px;
+	}
+	
+	这样当鼠标滑过div时,div的高度渐渐就会从200px增加到600px
+*/
+
+也可以这样
+
+s 一秒
+
+ms 千分之一秒
+
+transtition: height 2s,width 2s;(复合属性)
+
+transtition: all(所有) 2s linear(匀速) 1s(延迟一秒);
+
+这样只不支持 display: none/block;
+
+linear 匀速
+ease 逐渐慢下来
+ease-in 后面加速
+ease-out 后面减速
+ease-in-out 前面加速后面减速
+
+贝塞尔曲线 cubic-bezier()
+
+到 https://cubic-bezier.com/ 网站访问
+
+单一属性
+
+transtition: all( == transtition-property: all;)
+2s ( == transtition-duration: 2s;)
+linear ( == transtition-timing-function: linear;)
+1s ( == transtition-delay: 1s;);
+
+/////////////////////////////////////////////////////////////////////////////
+
+opacity 设置透明度
+
+opacity: 1;//默认值
+
+opacity: 0.5;//越小透明度就越高
+
+/////////////////////////////////////////////////////////////////////////////
+
+(2|3)D属性 transform(不会影响别的元素的位置)
+
+transform-oright: left bottom;//设置中心点
+
+transform: translateY(100px);//向下移100px
+
+transform: translateX(100px);//向右移动100px
+
+transform: translateX(...) translateY(...);//也可以写多个
+
+transform: translate(X轴,Y轴);//上面两个的组合
+
+transform: scale(2,3);//X轴放大两倍,Y轴放大三倍
+
+transform: scaleX(2);//X轴放大两倍
+
+transform: scaleY(3);//Y轴放大三倍
+
+如果赋负值,那就是倒放放大
+
+transform: rotate(100deg);//旋转100度
+
+transform: rotateX(100deg);//3D效果,向上翻
+
+transform: rotateY(100deg);//3D效果,向左翻
+
+transform: skewY(360deg);//../mp4/1.mp4
+
+transform: skewX(360deg);//../mp4/2.mp4
+
+也可以这样
+
+transform: skew(360deg,20deg);
+
+3D效果
+
+必要设置
+
+<div class="box">
+	<div class="center"></div>
+</div>
+
+.box {
+	/*...*/
+	transform-style: preserve-3d;
+	
+}
+
+transform: translateZ(100px);向前100px
+
+perspective 观看者与屏幕之间的距离
+
+父元素设置:
+
+perspective: 900px;//与屏幕距离900px
+
+旋转
+
+rotateX(100deg);
+
+https://www.bilibili.com/video/BV17z4y1D7Yj?p=173&t=185.3
+
+rotateY(100deg)
+
+https://www.bilibili.com/video/BV17z4y1D7Yj?p=173&t=306.0
+
+rotateZ(100deg)
+
+https://www.bilibili.com/video/BV17z4y1D7Yj?p=173&t=369.8
+
+rotate3d(1,0.5,0.2,30deg);//X旋转30deg,Y旋转15deg,Z旋转6deg
+
+大小
+
+scaleX(...)
+
+scaleY(...)
+
+scaleZ(...)要配合其他的属性才能显示效果
+
+scale3d(...)和rotate3d差不多
+
+/////////////////////////////////////////////////////////////////////////////
+
+关键帧动画(也就是自动运行动画)
+
+div {
+	width: 200px;
+	height: 200px;
+	background: red;
+	animation: LFM(指定的名字) 2s(两秒钟完成变化) linear(匀速) 0s(延迟);
+}
+
+@keyframes LFM(名字) {
+	from {
+	/*初始状态*/
+		width: 200px;
+		height: 200px;
+		background: red;
+	}
+	to {
+	/*结束状态*/
+		width: 400px;
+		height: 600px;
+		background: red;
+	}
+}
+
+如果 animation只设置运行一次的话,那么改变完后就会回到原来的属性
+
+百分比设置
+
+div {
+	width: 200px;
+	height: 200px;
+	background: red;
+	animation: LFM(指定的名字) 2s(两秒钟完成变化) linear(匀速) 0s(延迟);
+}
+
+@keyframes LFM(名字) {
+	10% {
+	/*如果10秒钟完成变化,那这个只会在10秒钟的10%的时候执行*/
+		width: 200px;
+		height: 200px;
+		background: red;
+	}
+	90% {
+	/*与上面同理*/
+		width: 400px;
+		height: 600px;
+		background: red;
+	}
+}
+
+animation: identifier1 2s linear 0s 2(执行两次);
+
+animation: identifier1 (
+	animation-name
+) 2s (
+	animation-duration
+) linear (
+	animation-timing-function
+) 0s (
+	animation-delay;
+) infinite(执行无数次,也可以写成5,执行五次) (
+	animation-iteration-count
+);
+
+animation-direction 检索或设置对象动画在循环中是否反向运动
+
+animation-play-state 检索或设置对象动画的状态
+
+animation-play-state: paused;//暂停
+
+animation-play-state: running;//运行
+
+animation-duration: normal;//正常
+
+animation-direction: reverse;//反方向走
+
+animation-direction: alternate;//正常方向-交替(from到to,然后to到from)
+
+animation-direction: alternate;//反方向-交替(to到from,然后from到to)
+
+animation: LFM 2s infinite steps(1(1帧完成过渡),end)
+
+end 看不到最后一帧
+
+start 看不到第一帧
+
+如果设置了steps值,那就不能设置linear,ease...等等的值
+
+也可以写
+
+step-start
+
+step-end
+
+animate库
+
+访问https://www.dowebok.com/demo/2014/98/
+
+https://www.dowebok.com
+
+有很多的样式挑选
+
+/////////////////////////////////////////////////////////////////////////////
+
+网格布局
+
+<section>
+	<div>
+		...
+	</div>
+	
+	<div>
+		...
+	</div>
+	
+	<div>
+		...
+	</div>
+	
+	<div>
+		...
+	</div>
+	
+	<div>
+		<p></p>
+	</div>
+	
+</section>
+
+以上代码section为容器(别的标签也可以),div为项目(项目不包括p标签)
+
+section 可以是 div,span,...
+
+grid-template-rows: 200px 200px 200px;//分为三行,分别是200px 200px 200px
+
+grid-template-columns: 200px 200px 200px;//分为三列,分别是200px 200px 200px
+
+也可以这样
+
+grid-template-columns: 25% 25% 25% 25%;//平均分成四份
+
+也可以这样
+
+grid-template-columns: repeat(3,33.33%);//第一个表示的是份数,第二个表示每个占有的空间
+
+grid-template-columns: repeat(auto-fill,33.33%);//自动划分
+
+fr 片段
+
+grid-template-columns: 1fr 1fr 1fr;//和弹性盒的flex属性差不多
+
+
+minmax
+
+grid-template-columns: minmax(100px,200px) 200px 300px;//最小只能为100px,最大只能为200px
+
+auto
+
+grid-template-columns: 100px auto(占满剩余空间) 200px;
+
+grid-row-gap 设置行间距
+
+grid-row-gap: 200px;
+
+grid-column-gap 设置列间距
+
+grid-column-gap: 200px;
+
+grid-gap 复合式写法
+
+grid-gap: 200px 200px;
+
+grid-template-areas: 
+	'a b c'
+	'd e f'
+	'g h i'
+;//父盒子设置,每个子盒子的占位
+
+grid-areas: a;//子盒子设置名称
+
+如果这样设置
+
+grid-template-areas: 
+	'a a c'
+	'd e f'
+	'g h i'
+;//名称为a的子盒子就会占两个空间
+
+对齐方式
+
+grid-auto-flow: row;//默认值,横向排列
+
+grid-auto-flow: column;//竖向排列
+
+justify-content 调整所有子项目横向位置
+
+justify-content: flex-start;//默认值,靠左
+
+justify-content: flex-end;//靠右
+
+justify-content: center;//水平居中
+
+justify-content: space-between;//两端对其
+
+justify-content: space-around;//距离环绕
+
+justify-content: space-evenly;//每个标签的距离一致(包括边框)
+
+align-content 调整所有子项目竖向位置
+
+align-content: flex-start;//靠左
+
+align-content: flex-end;//靠右
+
+align-content: center;//居中
+
+align-content: space-between;//两端对其
+
+align-content: space-evenly;//每个标签的距离一致(包括边框)
+
+align-items 调整竖轴位置(在项目里)
+
+align-items: flex-start;//顶部
+
+align-items: center;//中间
+
+align-items: flex-end;//底部
+
+justify-items 同理
+
+justify-items align-items 复合属性
+
+place-items
+
+合并属性
+
+grid-column-start 往左合并
+
+grid-column-end 往右合并
+
+grid-row-end 往下合并
+
+grid-row-start 往上合并
+
+grid-column-end: 3;//往左吞并2个
+
+复合属性
+
+grid-column: 2/4;
+grid-row: 2/4;
